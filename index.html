@@ -1,59 +1,264 @@
-<html><head>
-<meta charset="utf-8"/>
-<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
-<title>Stitch Design</title>
-<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>EduValley – Admin Auth</title>
+  <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&family=Noto+Sans:wght@400;600;800&display=swap"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body { min-height: max(884px, 100dvh); font-family: Lexend, "Noto Sans", sans-serif; }
+    .card { box-shadow: 0 10px 30px rgba(2,8,23,0.06); }
+    button { cursor: pointer; }
   </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
+</head>
 <body class="bg-slate-50">
-<div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
-<div class="flex flex-col items-center justify-center p-6 space-y-8 h-full">
-<div class="flex flex-col items-center space-y-2">
-<div class="flex items-center justify-center bg-[#0d7ff2] rounded-full w-16 h-16">
-<span class="material-symbols-outlined text-white text-4xl"> school </span>
+<div class="relative flex min-h-screen flex-col bg-white justify-between overflow-x-hidden">
+  <main class="flex flex-col items-center justify-center p-6 space-y-8 grow">
+
+    <!-- Logo/Title -->
+    <div class="flex flex-col items-center space-y-2">
+      <div class="flex items-center justify-center bg-[#0d7ff2] rounded-full w-16 h-16">
+        <span class="material-symbols-outlined text-white text-4xl"> school </span>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-800">Admin Login</h1>
+      <p class="text-slate-500 text-sm">Welcome! Sign in with email/password or phone OTP.</p>
+    </div>
+
+    <!-- Tabs -->
+    <nav class="grid grid-cols-3 gap-2 w-full max-w-xl">
+      <button type="button" class="tab rounded-xl bg-white card px-4 py-2 text-sm font-semibold ring-2 ring-blue-600" data-tab="login">Login</button>
+      <button type="button" class="tab rounded-xl bg-white card px-4 py-2 text-sm font-semibold" data-tab="signup">Sign Up</button>
+      <button type="button" class="tab rounded-xl bg-white card px-4 py-2 text-sm font-semibold" data-tab="phone">Phone OTP</button>
+    </nav>
+
+    <!-- Panels wrapper -->
+    <div class="w-full max-w-xl space-y-6">
+
+      <!-- LOGIN PANEL -->
+      <section id="panel-login" class="panel bg-white rounded-2xl card p-6 space-y-4">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> person </span>
+          <input id="loginEmail" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Email" type="email"/>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> lock </span>
+          <input id="loginPassword" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Password" type="password"/>
+        </div>
+        <button type="button" id="btnLogin" class="flex w-full items-center justify-center rounded-xl bg-[#0d7ff2] px-5 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[#0d7ff2] focus:ring-offset-2">Login</button>
+        <div class="text-center">
+          <a id="goReset" class="text-sm text-[#0d7ff2] hover:underline" href="#">Forgot password?</a>
+        </div>
+        <p id="loginMsg" class="text-sm text-slate-600 text-center"></p>
+      </section>
+
+      <!-- SIGNUP PANEL -->
+      <section id="panel-signup" class="panel hidden bg-white rounded-2xl card p-6 space-y-4">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> badge </span>
+          <input id="suName" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Full name" type="text"/>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> mail </span>
+          <input id="suEmail" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Email" type="email"/>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> lock </span>
+          <input id="suPassword" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Password (min 6 chars)" type="password"/>
+        </div>
+        <label class="inline-flex items-center gap-2">
+          <input id="suIsAdmin" type="checkbox" class="rounded">
+          <span class="text-sm text-slate-600">Mark as Admin (UI only; secure via custom claims)</span>
+        </label>
+        <button type="button" id="btnSignup" class="flex w-full items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2">Sign Up</button>
+        <p id="signupMsg" class="text-sm text-slate-600 text-center"></p>
+      </section>
+
+      <!-- PHONE OTP PANEL -->
+      <section id="panel-phone" class="panel hidden bg-white rounded-2xl card p-6 space-y-4">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> call </span>
+          <input id="phNumber" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="+91XXXXXXXXXX" type="tel"/>
+        </div>
+        <div id="recaptcha-container" class="my-2"></div>
+        <button type="button" id="btnSendOTP" class="flex w-full items-center justify-center rounded-xl bg-[#0d7ff2] px-5 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[#0d7ff2] focus:ring-offset-2">Send OTP</button>
+        <div id="otpBox" class="hidden space-y-4">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> password </span>
+            <input id="otpCode" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Enter OTP"/>
+          </div>
+          <button type="button" id="btnVerifyOTP" class="flex w-full items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-base font-bold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2">Verify & Login</button>
+        </div>
+        <p id="phoneMsg" class="text-sm text-slate-600 text-center"></p>
+      </section>
+
+      <!-- RESET PANEL -->
+      <section id="panel-reset" class="panel hidden bg-white rounded-2xl card p-6 space-y-4">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> mail </span>
+          <input id="rpEmail" class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="you@example.com" type="email"/>
+        </div>
+        <button type="button" id="btnReset" class="flex w-full items-center justify-center rounded-xl bg-slate-800 px-5 py-3 text-base font-bold text-white shadow-sm hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:ring-offset-2">Send Reset Link</button>
+        <p id="resetMsg" class="text-sm text-slate-600 text-center"></p>
+      </section>
+
+      <!-- DASHBOARD (simple placeholder) -->
+      <section id="panel-dashboard" class="hidden bg-white rounded-2xl card p-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-slate-800">Dashboard</h2>
+          <div class="flex items-center gap-3">
+            <span id="userEmail" class="text-sm text-slate-600"></span>
+            <button type="button" id="btnLogout" class="rounded-lg bg-slate-800 text-white px-4 py-2 text-sm">Logout</button>
+          </div>
+        </div>
+        <pre id="userDump" class="mt-4 text-xs bg-slate-50 p-3 rounded-lg overflow-auto"></pre>
+      </section>
+
+    </div>
+  </main>
 </div>
-<h1 class="text-2xl font-bold text-slate-800">Admin Login</h1>
-</div>
-<div class="w-full max-w-sm space-y-6">
-<div class="flex flex-col space-y-4">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> person </span>
-<input class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Username"/>
-</div>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"> lock </span>
-<input class="form-input w-full rounded-xl border-slate-300 bg-white py-3 pl-10 pr-4 text-slate-800 placeholder:text-slate-400 focus:border-[#0d7ff2] focus:ring-[#0d7ff2]" placeholder="Password" type="password"/>
-</div>
-</div>
-<div class="space-y-4">
-<button class="flex w-full items-center justify-center rounded-xl bg-[#0d7ff2] px-5 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[#0d7ff2] focus:ring-offset-2">
-            Login
-          </button>
-<button class="flex w-full items-center justify-center rounded-xl bg-slate-100 px-5 py-3 text-base font-bold text-slate-600 shadow-sm transition-colors hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2">
-            Sign Up
-          </button>
-</div>
-</div>
-<div class="text-center">
-<a class="text-sm text-[#0d7ff2] hover:underline" href="#">Forgot password?</a>
-</div>
-</div>
-</div>
-</body></html>
+
+<!-- Firebase (v10+ Modular) -->
+<script type="module">
+  // Replace with your config from Firebase Console → Project settings
+  const firebaseConfig = {
+    apiKey: "AIzaSyAz1kO5KfUEt9SxJllJee07_vwqU_liKLo",
+    authDomain: "eduvalley-login.firebaseapp.com",
+    projectId: "eduvalley-login",
+    storageBucket: "eduvalley-login.appspot.com",
+    messagingSenderId: "885253089975",
+    appId: "1:885253089975:web:2b04819fae96ae55fabf5b2"
+  };
+
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, RecaptchaVerifier, signInWithPhoneNumber, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+  import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const $ = (id) => document.getElementById(id);
+  const show = (el) => el.classList.remove('hidden');
+  const hide = (el) => el.classList.add('hidden');
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('ring-2','ring-blue-600'));
+      btn.classList.add('ring-2','ring-blue-600');
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.panel').forEach(p => hide(p));
+      show($("panel-" + target));
+    });
+  });
+
+  // Forgot password link → open reset panel
+  $("goReset").addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.panel').forEach(p => hide(p));
+    show($("panel-reset"));
+  });
+
+  // Auth state → dashboard
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      show($("panel-dashboard"));
+      $("userEmail").textContent = user.email || user.phoneNumber || user.uid;
+      const ref = doc(db, 'users', user.uid);
+      const snap = await getDoc(ref);
+      const profile = snap.exists() ? snap.data() : {};
+      $("userDump").textContent = JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        phone: user.phoneNumber,
+        displayName: user.displayName,
+        metadata: user.metadata,
+        profile
+      }, null, 2);
+    } else {
+      hide($("panel-dashboard"));
+    }
+  });
+
+  // Login
+  $("btnLogin").addEventListener('click', async () => {
+    const email = $("loginEmail").value.trim();
+    const password = $("loginPassword").value;
+    const msg = $("loginMsg");
+    msg.textContent = 'Logging in...';
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      msg.textContent = 'Success!';
+    } catch (e) { console.error(e); msg.textContent = e.message; }
+  });
+
+  // Signup
+  $("btnSignup").addEventListener('click', async () => {
+    const name = $("suName").value.trim();
+    const email = $("suEmail").value.trim();
+    const password = $("suPassword").value;
+    const isAdmin = $("suIsAdmin").checked;
+    const msg = $("signupMsg");
+    msg.textContent = 'Creating account...';
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      if (name) await updateProfile(cred.user, { displayName: name });
+      await setDoc(doc(db, 'users', cred.user.uid), { name, email, role: isAdmin ? 'admin' : 'user', createdAt: serverTimestamp() });
+      msg.textContent = 'Account created & signed in!';
+    } catch (e) { console.error(e); msg.textContent = e.message; }
+  });
+
+  // Password reset
+  $("btnReset").addEventListener('click', async () => {
+    const email = $("rpEmail").value.trim();
+    const msg = $("resetMsg");
+    msg.textContent = 'Sending reset link...';
+    try {
+      await sendPasswordResetEmail(auth, email);
+      msg.textContent = 'Reset email sent!';
+    } catch (e) { console.error(e); msg.textContent = e.message; }
+  });
+
+  // Phone OTP
+  let confirmationResult = null;
+  const setupRecaptcha = () => {
+    if (window.recaptchaVerifier) return;
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { size: 'normal' });
+  };
+
+  $("btnSendOTP").addEventListener('click', async () => {
+    setupRecaptcha();
+    const phone = $("phNumber").value.trim();
+    const msg = $("phoneMsg");
+    msg.textContent = 'Sending OTP...';
+    try {
+      confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
+      msg.textContent = 'OTP sent. Check your phone.';
+      show($("otpBox"));
+    } catch (e) { console.error(e); msg.textContent = e.message + ' (Ensure domain is authorized in Firebase Auth)'; }
+  });
+
+  $("btnVerifyOTP").addEventListener('click', async () => {
+    const code = $("otpCode").value.trim();
+    const msg = $("phoneMsg");
+    msg.textContent = 'Verifying...';
+    try {
+      const result = await confirmationResult.confirm(code);
+      const u = result.user;
+      const ref = doc(db, 'users', u.uid);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        await setDoc(ref, { phone: u.phoneNumber, role: 'user', createdAt: serverTimestamp() });
+      }
+      msg.textContent = 'Logged in successfully!';
+    } catch (e) { console.error(e); msg.textContent = e.message; }
+  });
+
+  // Logout
+  $("btnLogout").addEventListener('click', async () => { await signOut(auth); });
+</script>
+</body>
+</html>
